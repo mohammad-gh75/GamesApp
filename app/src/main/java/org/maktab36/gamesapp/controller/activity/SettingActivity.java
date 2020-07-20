@@ -17,12 +17,12 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container_games);
 
         if (fragment == null) {
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.fragment_container, new SettingFragment())
+                    .add(R.id.fragment_container_games, new SettingFragment())
                     .commit();
         }
     }

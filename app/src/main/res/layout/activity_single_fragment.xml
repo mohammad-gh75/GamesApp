@@ -6,47 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:padding="4dp"
-        android:text="@string/button_setting"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
 
     <LinearLayout
+        android:id="@+id/fragment_container_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_tic_tac_toe"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:text="@string/Tic_Tac_Toe"
-            android:textAllCaps="false"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/button_4_in_row"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:text="@string/Four_in_a_Row"
-            android:textAllCaps="false"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_container_games"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
