@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">GamesApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="label_setting">Setting</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="button_setting">Setting</string>
     <string name="Tic_Tac_Toe">Tic Tac Toe</string>
     <string name="Four_in_a_Row">4 in a Row</string>
+
+    <string name="button_try_again">Try Again</string>
+
+
+    <string name="title_tic_tac">Game: Tic Tac Toe</string>
+    <string name="title_4_in_row">Game: 4 in a Row</string>
+    <string name="Winner">Winner: %1$s</string>
+
+
+    <string name="X">X</string>
+    <string name="O">O</string>
 </resources>
