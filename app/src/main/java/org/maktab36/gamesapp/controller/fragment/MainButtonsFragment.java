@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import org.maktab36.gamesapp.R;
 import org.maktab36.gamesapp.controller.activity.SettingActivity;
-import org.maktab36.gamesapp.controller.activity.SingleFragmentActivity;
 
 public class MainButtonsFragment extends Fragment {
 

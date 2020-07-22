@@ -10,18 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import org.maktab36.gamesapp.R;
-import org.maktab36.gamesapp.model.TicTacStates;
+import org.maktab36.gamesapp.model.GameStates;
 
 public class TicTacToeFragment extends Fragment {
     private String mCurrentPlayer = "X";
     private TableLayout mTableLayout;
-    private Button[][] mButtonsGame =new Button[3][3];
+    private Button[][] mButtonsGame = new Button[3][3];
     private Button mButtonTryAgain;
+    private String mPlayer1Name="X";
+    private String mPlayer2Name="O";
 
     public TicTacToeFragment() {
         // Required empty public constructor
@@ -52,8 +53,8 @@ public class TicTacToeFragment extends Fragment {
     }
 
     private void findViews(View view) {
-        mTableLayout = view.findViewById(R.id.table);
-        mButtonTryAgain=view.findViewById(R.id.button_tic_tac_try_again);
+        mTableLayout = view.findViewById(R.id.table_tic_tac);
+        mButtonTryAgain = view.findViewById(R.id.button_tic_tac_try_again);
     }
 
 
@@ -73,11 +74,11 @@ public class TicTacToeFragment extends Fragment {
             case CONTINUE:
                 switchTurn();
                 break;
-            case X_WINS:
-                endGame("X wins");
+            case PLAYER_1_WINS:
+                endGame(mPlayer1Name+" wins");
                 break;
-            case O_WINS:
-                endGame("O wins");
+            case PLAYER_2_WINS:
+                endGame(mPlayer2Name+" wins");
                 break;
             case DRAW:
                 endGame("DRAW");
@@ -96,16 +97,9 @@ public class TicTacToeFragment extends Fragment {
         }
     }
 
-    private TicTacStates checkState() {
+    private GameStates checkState() {
         boolean flag = false;
-        String[][] buttonsText = new String[3][3];
-        for (int i = 0; i < mTableLayout.getChildCount(); i++) {
-            TableRow row = (TableRow) mTableLayout.getChildAt(i);
-            for (int j = 0; j < row.getChildCount(); j++) {
-                mButtonsGame[i][j] = (Button) row.getChildAt(j);
-                buttonsText[i][j] = mButtonsGame[i][j].getText().toString();
-            }
-        }
+        String[][] buttonsText = getButtonsText();
         for (int i = 0; i < 8; i++) {
             String line = null;
             switch (i) {
@@ -135,45 +129,57 @@ public class TicTacToeFragment extends Fragment {
                     break;
             }
             if (line.equals("XXX")) {
-                return TicTacStates.X_WINS;
+                return GameStates.PLAYER_1_WINS;
             } else if (line.equals("OOO")) {
-                return TicTacStates.O_WINS;
+                return GameStates.PLAYER_2_WINS;
             } else if (line.length() < 3) {
                 flag = true;
             }
         }
         if (flag) {
-            return TicTacStates.CONTINUE;
+            return GameStates.CONTINUE;
         }
-        return TicTacStates.DRAW;
+        return GameStates.DRAW;
     }
 
-    private void endGame(String winner){
+    private String[][] getButtonsText() {
+        String[][] buttonsText = new String[3][3];
+        for (int i = 0; i < mTableLayout.getChildCount(); i++) {
+            TableRow row = (TableRow) mTableLayout.getChildAt(i);
+            for (int j = 0; j < row.getChildCount(); j++) {
+                mButtonsGame[i][j] = (Button) row.getChildAt(j);
+                buttonsText[i][j] = mButtonsGame[i][j].getText().toString();
+            }
+        }
+        return buttonsText;
+    }
+
+    private void endGame(String winner) {
         setButtonsEnabled(false);
         mButtonTryAgain.setVisibility(View.VISIBLE);
         showSnackBar(winner);
     }
 
     private void setButtonsEnabled(boolean enabled) {
-        for (int i = 0; i < mButtonsGame.length ; i++) {
-            for (int j = 0; j < mButtonsGame[0].length ; j++) {
+        for (int i = 0; i < mButtonsGame.length; i++) {
+            for (int j = 0; j < mButtonsGame[0].length; j++) {
                 mButtonsGame[i][j].setEnabled(enabled);
             }
         }
     }
 
-    private void startGame(){
+    private void startGame() {
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container_games,new TicTacToeFragment())
+                .replace(R.id.fragment_container_games, new TicTacToeFragment())
                 .commit();
     }
 
-    private void showSnackBar(String winner){
-        String str="result is "+winner;
-        Snackbar snackbar=Snackbar
-                .make(getView(),str,Snackbar.LENGTH_LONG);
+    private void showSnackBar(String winner) {
+        String str = "result of game: " + winner;
+        Snackbar snackbar = Snackbar
+                .make(getView(), str, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }

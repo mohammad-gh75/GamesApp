@@ -17,7 +17,7 @@
         android:textSize="24sp" />
 
     <TableLayout
-        android:id="@+id/table"
+        android:id="@+id/table_tic_tac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
